@@ -28,9 +28,7 @@
 #    - Hasil akhirnya adalahsebuah model terlatih (objek PyCaret) dan laporan analisis. 
 
 
-# ------------------------------------------------------------------------------
-# BAGIAN 1: MENGIMPOR LIBRARY YANG DIBUTUHKAN
-# ------------------------------------------------------------------------------
+# 1. IMPORT LIBRARY
 import os
 import argparse  # Untuk membuat antarmuka baris perintah (command-line interface)
 import json      # Untuk bekerja dengan data format JSON
@@ -43,9 +41,7 @@ from pycaret.classification import setup as setup_clf, compare_models as compare
 from pycaret.regression import setup as setup_reg, compare_models as compare_reg, pull as pull_reg
 
 
-# ------------------------------------------------------------------------------
-# BAGIAN 2: FUNGSI UNTUK MELATIH MODEL (TRAIN_MODEL)
-# ------------------------------------------------------------------------------
+# 2. TRAIN MODEL
 def train_model(data_input: pd.DataFrame, problem_type: str, target_column: str):
     """
     Fungsi ini menjalankan seluruh proses pelatihan model menggunakan PyCaret.
@@ -98,9 +94,8 @@ def train_model(data_input: pd.DataFrame, problem_type: str, target_column: str)
     # Mengembalikan tabel perbandingan untuk dianalisis oleh AI
     return comparison_table
 
-# ------------------------------------------------------------------------------
-# BAGIAN 3: FUNGSI UNTUK MENGANALISIS HASIL DENGAN AI (DESCRIBE_TRAINING_JOB)
-# ------------------------------------------------------------------------------
+
+# 3. DESCRIBE TRAINING JOB (FUNGSI UNTUK MENGANALISIS HASIL DENGAN AI )
 def describe_training_job(comparison_table: pd.DataFrame):
     """
     Fungsi ini mengirimkan hasil pelatihan ke AI Anthropic untuk dianalisis dan
@@ -218,9 +213,7 @@ def describe_training_job(comparison_table: pd.DataFrame):
             'report': f"Error: {e}"
         }
 
-# ------------------------------------------------------------------------------
-# BAGIAN 4: FUNGSI BANTU UNTUK MEMFORMAT LAPORAN (JSON_TO_MARKDOWN)
-# ------------------------------------------------------------------------------
+# 4. JSON TO MARKDOWN (FUNGSI BANTU UNTUK MEMFORMAT LAPORAN)
 def json_to_markdown(data: dict):
     """
     Fungsi ini mengubah output JSON terstruktur dari AI menjadi string Markdown
@@ -255,9 +248,8 @@ def json_to_markdown(data: dict):
     
     return "\n".join(md)
 
-# ------------------------------------------------------------------------------
-# BAGIAN 5: TITIK MASUK UTAMA PROGRAM (MAIN EXECUTION BLOCK)
-# ------------------------------------------------------------------------------
+
+# 5. MAIN EXECUTION BLOCK
 if __name__ == '__main__':
     # Membuat parser untuk menerima argumen dari baris perintah saat skrip dijalankan.
     parser = argparse.ArgumentParser(description="AutoML and AI Reporting Tool")
